@@ -5,14 +5,14 @@ import (
 	"encoding/json"
 )
 
-//go:embed config/mergeableRanks.json
+//go:embed mergeableRanks.json
 var merageRanksFile embed.FS
 
-//go:embed config/specialTokens.json
+//go:embed specialTokens.json
 var specialTokensFile embed.FS
 
 func LoadMergeableRankFile() (map[string]int, error) {
-	data, err := merageRanksFile.ReadFile("config/mergeableRanks.json")
+	data, err := merageRanksFile.ReadFile("mergeableRanks.json")
 	if err != nil {
 		return nil, err
 	}
@@ -25,7 +25,7 @@ func LoadMergeableRankFile() (map[string]int, error) {
 }
 
 func LoadSpecialTokensFile() (map[string]int, error) {
-	data, err := specialTokensFile.ReadFile("config/specialTokens.json")
+	data, err := specialTokensFile.ReadFile("specialTokens.json")
 	if err != nil {
 		return nil, err
 	}
