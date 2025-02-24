@@ -1,0 +1,8 @@
+{
+  "<|endoftext|>": 50256,
+  "<|fim_prefix|>": 50257,
+  "<|fim_middle|>": 50258,
+  "<|fim_suffix|>": 50259,
+  "<|endofprompt|>": 50260,
+  "<|pad|>": 50261
+}
