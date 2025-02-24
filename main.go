@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/ableinc/prompt-token-count/tokenizer"
+	tokenizer "github.com/ableinc/prompt-token-count/cmd/tokenizer"
 )
 
 func EncodingForModel(model string) (*tokenizer.Encoding, error) {
