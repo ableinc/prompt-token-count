@@ -36,18 +36,26 @@ var encodings = map[string]*Encoding{
 		Name:   "o200k_base",
 		PatStr: `'s|'t|'re|'ve|'m|'ll|'d| ?\p{L}+| ?\p{N}+| ?[^\s\p{L}\p{N}]+|\s+`,
 	},
+	"p50k_edit": {
+		Name:   "p50k_edit",
+		PatStr: `'s|'t|'re|'ve|'m|'ll|'d| ?\p{L}+| ?\p{N}+| ?[^\s\p{L}\p{N}]+|\s+`,
+	},
+	"gpt2": {
+		Name:   "gpt2",
+		PatStr: `'s|'t|'re|'ve|'m|'ll|'d| ?\p{L}+| ?\p{N}+| ?[^\s\p{L}\p{N}]+|\s+`,
+	},
 }
 
 func GetEncoding(name string) (*Encoding, error) {
 	enc, ok := encodings[name]
 	if !ok {
-		return nil, fmt.Errorf("Unknown encoding: %s", name)
+		return nil, fmt.Errorf("unknown encoding: %s", name)
 	}
 
 	if enc.MergeableRanks == nil {
 		mergeableRanks, err := internal.LoadMergeableRankFile()
 		if err != nil {
-			return nil, fmt.Errorf("Failed to load mergeable ranks: %v", err)
+			return nil, fmt.Errorf("failed to load mergeable ranks: %v", err)
 		}
 		enc.MergeableRanks = mergeableRanks
 	}
@@ -55,7 +63,7 @@ func GetEncoding(name string) (*Encoding, error) {
 	if enc.SpecialTokens == nil {
 		specialTokens, err := internal.LoadSpecialTokensFile()
 		if err != nil {
-			return nil, fmt.Errorf("Failed to open special tokens: %v", err)
+			return nil, fmt.Errorf("failed to open special tokens: %v", err)
 		}
 		enc.SpecialTokens = specialTokens
 	}

@@ -22,10 +22,16 @@ import (
 
 func encodingForModel(model string) (*tokenizer.Encoding, error) {
 	switch model {
-	case "gpt-4", "gpt-3.5-turbo", "text-embedding-ada-002":
+	case "gpt-4", "gpt-4-turbo", "gpt-3.5-turbo", "text-embedding-ada-002":
 		return tokenizer.GetEncoding("cl100k_base")
-	case "text-davinci-002", "text-davinci-003":
+	case "gpt-4o", "gpt-4o-mini":
+		return tokenizer.GetEncoding("o200k_base")
+	case "text-davinci-002", "text-davinci-003", "code-davinci-002", "text-davinci-edit-001":
 		return tokenizer.GetEncoding("p50k_base")
+	case "code-cushman-001", "davinci", "curie", "babbage", "ada":
+		return tokenizer.GetEncoding("r50k_base")
+	case "text-ada-001", "text-babbage-001", "text-curie-001", "text-davinci-001", "code-davinci-001":
+		return tokenizer.GetEncoding("gpt2")
 	default:
 		return nil, fmt.Errorf("unknown model: %s", model)
 	}
