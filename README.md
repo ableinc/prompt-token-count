@@ -2,6 +2,12 @@
 
 Tokenize a prompt and/or get the number of tokens a prompt will take
 
+## Install
+
+```bash
+go get github.com/ableinc/prompt-token-count
+```
+
 ## Usage
 
 ```go
