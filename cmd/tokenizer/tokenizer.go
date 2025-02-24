@@ -45,7 +45,7 @@ func GetEncoding(name string) (*Encoding, error) {
 	}
 
 	if enc.MergeableRanks == nil {
-		mergeableRanks, err := internal.LoadJSONFile("mergeableRanks.json")
+		mergeableRanks, err := internal.LoadMergeableRankFile()
 		if err != nil {
 			return nil, fmt.Errorf("Failed to load mergeable ranks: %v", err)
 		}
@@ -53,7 +53,7 @@ func GetEncoding(name string) (*Encoding, error) {
 	}
 
 	if enc.SpecialTokens == nil {
-		specialTokens, err := internal.LoadJSONFile("specialTokens.json")
+		specialTokens, err := internal.LoadSpecialTokensFile()
 		if err != nil {
 			return nil, fmt.Errorf("Failed to open special tokens: %v", err)
 		}
