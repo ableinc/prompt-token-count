@@ -49,5 +49,6 @@ func main() {
 	fmt.Println("Encoding: ", tokens)
 	prompt = modelEncoding.Decode(tokens)
 	fmt.Println("Decoding: ", prompt)
-	fmt.Println("Number of tokens: ", prompt.CountTokens())
+	fmt.Println("Number of tokens (raw text): ", prompt.CountTokens())
+	fmt.Println("NUmber of tokens (encodings): ", tokens.CountTokens())
 }

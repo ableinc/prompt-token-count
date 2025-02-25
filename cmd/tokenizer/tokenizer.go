@@ -18,6 +18,7 @@ type Encoding struct {
 }
 
 type TokenString string
+type TokenArray []int
 
 var encodings = map[string]*Encoding{
 	"cl100k_base": {
@@ -75,7 +76,7 @@ func GetEncoding(name string) (*Encoding, error) {
 	return enc, nil
 }
 
-func (enc *Encoding) Encode(text TokenString) []int {
+func (enc *Encoding) Encode(text TokenString) TokenArray {
 	tokens := enc.Pattern.FindAllString(text.ToString(), -1)
 	ids := make([]int, 0, len(tokens))
 
@@ -89,10 +90,10 @@ func (enc *Encoding) Encode(text TokenString) []int {
 			}
 		}
 	}
-	return ids
+	return TokenArray(ids)
 }
 
-func (enc *Encoding) DecodeRaw(tokens []int) string {
+func (enc *Encoding) DecodeRaw(tokens TokenArray) string {
 	decoded := make([]string, len(tokens))
 	for i, token := range tokens {
 		found := false
@@ -115,7 +116,7 @@ func (enc *Encoding) DecodeRaw(tokens []int) string {
 	return strings.Join(decoded, "")
 }
 
-func (enc *Encoding) Decode(tokens []int) TokenString {
+func (enc *Encoding) Decode(tokens TokenArray) TokenString {
 	decoded := make([]string, len(tokens))
 	for i, token := range tokens {
 		found := false
@@ -189,4 +190,15 @@ func (text TokenString) CountTokens() int {
 
 func (text TokenString) ToString() string {
 	return string(text)
+}
+
+func (array TokenArray) CountTokens() int {
+	// Rule of thumb: 1 token ~ 4 characters
+	tokenLength := 4.0
+
+	// Calculate the number of tokens
+	numTokens := float64(len(array)) / tokenLength
+
+	// Round up to the nearest integer
+	return int(math.Ceil(numTokens))
 }

@@ -43,10 +43,15 @@ func main() {
 		log.Fatalf("incorrect model provided: %v", err)
 	}
 	prompt := tokenizer.TokenString("Give me Golang code to create a binary tree.")
-	fmt.Println("Number of tokens: ", prompt.CountTokens())
+	fmt.Println("Number of tokens (raw text): ", prompt.CountTokens())
 	tokens := model.Encode(prompt)
+	fmt.Println("NUmber of tokens (encodings): ", tokens.CountTokens())
 	fmt.Println("Encoding: ", tokens)
 	prompt = model.Decode(tokens)
 	fmt.Println("Decoding: ", prompt)
 }
 ```
+
+## Input/Output Cost?
+
+If you need to know the cost for a prompt (input) and the output (completion) use this library: [prompt-complete-cost](https://github.com/ableinc/prompt-complete-cost)
